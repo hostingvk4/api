@@ -39,7 +39,9 @@ return [
             'rules' => [
                 '' => 'site/index',
                 'auth' => 'site/login',
+                'registration' => 'site/registration',
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'post'],
             ],
         ]
         

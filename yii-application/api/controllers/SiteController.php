@@ -2,6 +2,7 @@
 namespace api\controllers;
 
 use api\models\LoginForm;
+use api\models\SignupForm;
 
 /**
  * Site controller
@@ -23,6 +24,16 @@ class SiteController extends \yii\rest\Controller
             return $model;
         }
     }
+
+    public function actionRegistration()
+    {
+        $model = new SignupForm();
+        if ($model->load(\Yii::$app->request->bodyParams, '') && $model->signup()) {
+            return $model;
+        }
+        return $model->errors;
+    }
+    
 
     protected function verbs()
     {
