@@ -37,21 +37,15 @@ return [
             'enableStrictParsing' => true,
             'showScriptName'      => false,
             'rules'               => [
-                'auth'         => 'site/login',
-                'registration'         => 'site/registration',
+                'auth'                      => 'site/login',
+                'registration'              => 'site/registration',
+                'verify-email'              => 'site/verify-email',
+                'reset-password'            => 'site/reset-password',
+                'resend-verification-email' => 'site/resend-verification-email',
+                'request-password-reset'    => 'site/request-password-reset',
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
                 [
                     'class' => 'yii\rest\UrlRule', 'controller' => 'post',
-                ],
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller'    => 'site',
-                    'extraPatterns' => [
-                        'GET verify-email' => 'verify-email',
-                        'POST reset-password' => 'reset-password',
-                        'POST resend-verification-email' => 'resend-verification-email',
-                        'POST request-password-reset' => 'request-password-reset',
-                    ],
                 ],
             ],
         ]
