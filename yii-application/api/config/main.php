@@ -7,44 +7,55 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'app-api',
-    'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'id'                  => 'app-api',
+    'basePath'            => dirname(__DIR__),
+    'bootstrap'           => ['log'],
     'controllerNamespace' => 'api\controllers',
-    'modules' => [],
-    'components' => [
-        'request' => [
+    'modules'             => [],
+    'components'          => [
+        'request'    => [
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
             ]
         ],
-        'user' => [
-            'identityClass' => 'common\models\User',
+        'user'       => [
+            'identityClass'   => 'common\models\User',
             'enableAutoLogin' => false,
-            'enableSession' => false,
+            'enableSession'   => false,
         ],
-        'log' => [
+        'log'        => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
+            'targets'    => [
                 [
-                    'class' => 'yii\log\FileTarget',
+                    'class'  => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],
             ],
         ],
         'urlManager' => [
-            'enablePrettyUrl' => true,
+            'enablePrettyUrl'     => true,
             'enableStrictParsing' => true,
-            'showScriptName' => false,
-            'rules' => [
-                '' => 'site/index',
-                'auth' => 'site/login',
-                'registration' => 'site/registration',
+            'showScriptName'      => false,
+            'rules'               => [
+                'auth'         => 'site/login',
+                'registration'         => 'site/registration',
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'post'],
+                [
+                    'class' => 'yii\rest\UrlRule', 'controller' => 'post',
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller'    => 'site',
+                    'extraPatterns' => [
+                        'GET verify-email' => 'verify-email',
+                        'POST reset-password' => 'reset-password',
+                        'POST resend-verification-email' => 'resend-verification-email',
+                        'POST request-password-reset' => 'request-password-reset',
+                    ],
+                ],
             ],
         ]
-        
+
     ],
-    'params' => $params,
+    'params'              => $params,
 ];
